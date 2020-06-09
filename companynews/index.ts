@@ -58,7 +58,7 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 		const requestHeaders: HeadersInit = new Headers();
 		requestHeaders.set("Ocp-Apim-Subscription-Key", "<<Key Here>>");
 		let uriBase = "<<Base URL>>/bing/v7.0/news/search";
-		let uriQuery = uriBase + "?count=5&q=" + val;
+		let uriQuery = uriBase + "?count=4&q=" + val;
 		let morenews = "https://www.bing.com/news/search?q="+val;
         // For now, consider the data is stored on a static `users.json` file
         return fetch(uriQuery, {
@@ -80,7 +80,7 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 				for( index= 0; index<res.value.length; index++){
 					let item = res.value[index];
 					let html = [];
-					html.push("<br/><div>");
+					html.push("<br/><div style='padding-top:20px;'>");
 					if (item.image) {
 						let width = 60;
 						let height = Math.round(width * item.image.thumbnail.height / item.image.thumbnail.width);
