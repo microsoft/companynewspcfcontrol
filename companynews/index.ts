@@ -1,6 +1,13 @@
 import {IInputs, IOutputs} from "./generated/ManifestTypes";
 
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 export class companynews implements ComponentFramework.StandardControl<IInputs, IOutputs> {
+	private _value: string;
+
+	private _context: ComponentFramework.Context<IInputs>;
+
+	private _container: HTMLDivElement;
 
 	/**
 	 * Empty constructor.
