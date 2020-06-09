@@ -1,24 +1,17 @@
 ---
-page_type: sample
+page_type: CompanyNews Component Description
 languages:
-- csharp
+- typescript
 products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
+- PowerApps component framework
+description: "The plugin provides News feature, by default getting news for a text from BING news, but can be customized for other news sources."
 ---
 
-# Official Microsoft Sample
+# CompanyNews Component
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+At times we need to fetch and show news about certain elements which are shown in the application or a page. For example, in a CRM application showing a list of accounts, a salesperson might want to keep a check on the latest news about the company.
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
-
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
-
-Give a short description for your sample here. What does it do and why is it important?
+The control is completely developed using Powerapps Component Framework, and is easy to use and modify. More details on PowerApps Component Framework https://docs.microsoft.com/en-us/powerapps/developer/component-framework/overview
 
 ## Contents
 
@@ -26,7 +19,7 @@ Outline the file contents of the repository. It helps users navigate the codebas
 
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
+| `companynews`     | PCF code to show news.                     |
 | `.gitignore`      | Define what to ignore at commit time.      |
 | `CHANGELOG.md`    | List of changes to the sample.             |
 | `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
@@ -35,19 +28,30 @@ Outline the file contents of the repository. It helps users navigate the codebas
 
 ## Prerequisites
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
-
+Install Powerapps command line support - https://docs.microsoft.com/en-us/powerapps/developer/component-framework/get-powerapps-cli
+ 
 ## Setup
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+Here is a step by step guide for using the component
+1. Clone the component to a local directory
+2. Run npm install
+3. Update index.ts and provide Bind news id along with base url under getnews function
+4. Build the code using- npm build run
+5. Execute the component - npm start 
 
 ## Running the sample
 
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
+For running the code - npm start
 
 ## Key concepts
 
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+getnews function- 
+This is the main function under index.ts, responsible for fetching news from news api and rendering the same. We can see the code needs to be updated for Key and Base URL
+	requestHeaders.set("Ocp-Apim-Subscription-Key", "<<Key Here>>");
+	let uriBase = "<<Base URL>>/bing/v7.0/news/search"; 
+One can easily replace the Bing news API with other news APIs or can also use multiple news sources. 
+
+Next piece of code parses and renders the news fetched from API. It is simple HTML rendered which can be updated on need basis to showcase different layouts.
 
 ## Contributing
 
