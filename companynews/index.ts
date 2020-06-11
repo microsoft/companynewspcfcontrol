@@ -58,7 +58,7 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 	}
 	
 	public getNews(val:string): any {
-	
+		if(val=="") return;
 		let constants = new Constants(); 
 		const requestHeaders: HeadersInit = new Headers();
 		let uriBase = "";
