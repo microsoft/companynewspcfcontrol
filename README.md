@@ -43,6 +43,18 @@ Here is a step by step guide for using the component
 
 For running the code - npm start
 
+## Using the plugin with Dynamics 365 CRM
+
+It is easy to import the news plugin to a Dynamics 365 org. For the org, 
+
+1. Go to Settings-> Customizations-> Customize the System 
+2. Under the Customizations window, drill down to Components-> entities->Accounts->Forms and select Main Account Form
+3. Add a new section Insert->Sections->One Column section. You can drag and drop the newly created section to any location on the page.
+4.  As we want to show the news for account name, drag and drop the account name property from the right “Field Explorer” panel to the newly created section.
+5. With the section being selected, click on change properties on the top header and give the section a relevant name like company news.
+6. Next, select the newly added account name property and again choose to change properties. Under this, go to controls and add “Companynews” control. You would want to uncheck the “Display label on form” option on the Display tab.
+7. Finally “Save” and “Publish” the changes.
+
 ## Key concepts
 
 getnews function- 
