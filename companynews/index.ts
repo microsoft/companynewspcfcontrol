@@ -1,4 +1,7 @@
 import {IInputs, IOutputs} from "./generated/ManifestTypes";
+import {Constants} from "./Constants";
+import {BingParser} from "./BingParser";
+import {GoogleParser} from "./GoogleParser";
 
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
@@ -55,12 +58,23 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 	}
 	
 	public getNews(val:string): any {
+	
+		let constants = new Constants(); 
 		const requestHeaders: HeadersInit = new Headers();
-		requestHeaders.set("Ocp-Apim-Subscription-Key", "<<Key Here>>");
-		let uriBase = "<<Base URL>>/bing/v7.0/news/search";
-		let uriQuery = uriBase + "?count=4&q=" + val;
-		let morenews = "https://www.bing.com/news/search?q="+val;
-        // For now, consider the data is stored on a static `users.json` file
+		let uriBase = "";
+		let uriQuery = "";
+		let morenews = "";
+		uriBase = constants.NewsURL;
+		morenews = constants.MoreNews + "?q="+val;
+		if(constants.NewsSource == "Bing"){	
+			requestHeaders.set("Ocp-Apim-Subscription-Key", constants.NewsKey);
+		    uriQuery = uriBase + "?count=4&q=" + val;
+		}
+		else if (constants.NewsSource == "Google")
+		{
+		    uriQuery = uriBase + "?q=" + val + "&token=" + constants.NewsKey;
+		}
+        
         return fetch(uriQuery, {
 			method: 'GET',
 			headers: requestHeaders
@@ -69,53 +83,63 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 		.then(res => res.json())
 		.then(res => {
 				// The response has an `any` type, so we need to cast
-				// it to the `User` type, and return it from the promise
+				let news: any = new BingParser(res);
+				if (constants.NewsSource == "Google"){
+					news = new GoogleParser(res);
+				}
 				let index=0;
 				let finalhtml="";
-				if(res.value.length==0){
+				if(news.getNewsCount()==0){
 					let html = [];
 					html.push("No News Data Available");
 					finalhtml= finalhtml + html.join("");
 				}
-				for( index= 0; index<res.value.length; index++){
-					let item = res.value[index];
+				let startDiv = "<div style='border-style: none;'>";
+				finalhtml = finalhtml + startDiv;
+				
+				for( index= 0; index<news.getNewsCount(); index++){
+					let item = news.getNewsAtIndex(index);
 					let html = [];
-					html.push("<br/><div style='padding-top:20px;'>");
-					if (item.image) {
+					let htmlbuilder = "<br/>";
+					htmlbuilder = htmlbuilder + "<div style='padding-top:20px;border-style: none;vertical-align: bottom;'>";
+					html.push(htmlbuilder);
+					if (news.hasImage(index)) {
 						let width = 60;
-						let height = Math.round(width * item.image.thumbnail.height / item.image.thumbnail.width);
-						html.push("<div width='"+width+"'style='float:left;width:20%'><img src='" + item.image.thumbnail.contentUrl +
-							"&h=" + height + "&w=" + width + "' width=" + width + " height=" + height + "></div>");
+						let height = news.getImageHeight(index);
+						let imageHTML = "<div width='"+width+"'style='float:left;width:20%;border-style: none;'>";
+						imageHTML = imageHTML + "<img src='" + news.getImageUrl(index) +
+							//"&h=" + height + "&w=" + width + 
+							"' width=" + width + " height=" + height + ">";
+						imageHTML = imageHTML + "</div>"
+						html.push(imageHTML);
 					}
-					html.push("<div><a href='" + item.url + "'>" + item.name + "</a></div><div style='float:left;padding-left:10px;'>");
-					if (item.category) html.push(" - " + item.category);
-					if (item.contractualRules) {    // MUST display source attributions
-						html.push(" (");
-						var rules = [];
-						for (var i = 0; i < item.contractualRules.length; i++)
-							rules.push(item.contractualRules[i].text);
-							html.push(rules.join(", "));
-							html.push(")");
-						}
-					html.push(" (" + this.getHost(item.url) + ")");
-					let d = new Date(item.datePublished);
+					let titleHTML = "<a href='" + news.getUrl(index) + "'>" + news.getTitle(index) + "</a>";
+					
+					html.push(titleHTML);
+					if (news.hasCategory(index)) html.push("<div style='style='float:left;border-style: none;vertical-align: bottom;'> - " + news.getCategory(index));
+					html.push(" (" + this.getHost(news.getUrl(index)) + ")");
+					let d = new Date(news.getDatePublished(index));
 					let mins =  d.getMinutes()+"";
 					if( d.getMinutes()<10){
 						mins = "0"+mins;
 					}
 					let datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + mins;
-					html.push("</div></div><div><div style='float:left;padding-left:10px;'>" + datestring +"</div></div><br/></p>");
-					
-					
+					let dateHTML = "</div><div style='float:left;vertical-align: bottom;padding-left:10px;'>" + datestring +"</div>";
+					html.push(dateHTML);
 					finalhtml= finalhtml + html.join("");
-					
 				}
+				
 				let html = [];
-				html.push("<br/><div><a target='_blank' href='"+morenews+"'+val>See more on Bing News</a></div>")
+				let moreNewsHTML = "<br/><div><a target='_blank' href='"+morenews+"'+val>See more on '" + constants.NewsSource + "' News</a></div>";
+				html.push(moreNewsHTML)
 				finalhtml= finalhtml + html.join("");
+				
+				let endDiv = "</div>";
+				finalhtml = finalhtml + endDiv;
+				
 				this._container.innerHTML = finalhtml;
 		})
-	}	
+	}
 
 	public getHost(url: any) {
 		return url.replace(/<\/?b>/g, "").replace(/^https?:\/\//, "").split("/")[0].replace(/^www\./, "");
