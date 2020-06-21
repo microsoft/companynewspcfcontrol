@@ -2,7 +2,9 @@
 <manifest>
   <control namespace="companynews" constructor="companynews" version="0.0.1" display-name-key="companynews" description-key="companynews description" control-type="standard">
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
-    <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="SearchString" display-name-key="SearchString" description-key="SearchString_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
+	<property name="APIKey" display-name-key="APIKey" description-key="APIKey_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
+	<property name="BaseURL" display-name-key="BaseURL" description-key="BaseURL_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
     <!-- 
       Property node's of-type attribute can be of-type-group attribute. 
       Example:

@@ -11,6 +11,10 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 	private _context: ComponentFramework.Context<IInputs>;
 
 	private _container: HTMLDivElement;
+	
+	private _apikey: string;
+	
+	private _baseurl: string;
 
 	/**
 	 * Empty constructor.
@@ -33,8 +37,12 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 		this._context = context;
 		this._container = document.createElement("div");
 		let val = ""; 
-		if( context.parameters.sampleProperty.raw!= null)
-		val =  context.parameters.sampleProperty.raw;
+		if( context.parameters.SearchString.raw!= null)
+		val =  context.parameters.SearchString.raw;
+		if( context.parameters.APIKey.raw!= null)
+		this._apikey =  context.parameters.APIKey.raw;
+		if( context.parameters.BaseURL.raw!= null)
+		this._baseurl =  context.parameters.BaseURL.raw;
 		this._value = val;
 
 		this._container.innerHTML = this._value;
@@ -49,8 +57,12 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		let val = ""; 
-		if( context.parameters.sampleProperty.raw!= null)
-		val =  context.parameters.sampleProperty.raw;
+		if( context.parameters.SearchString.raw!= null)
+		val =  context.parameters.SearchString.raw;
+		if( context.parameters.APIKey.raw!= null)
+		this._apikey =  context.parameters.APIKey.raw;
+		if( context.parameters.BaseURL.raw!= null)
+		this._baseurl =  context.parameters.BaseURL.raw;
 		this._value = val;
 		this._context = context;
 		this._container.innerHTML = this._value;
@@ -64,15 +76,15 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 		let uriBase = "";
 		let uriQuery = "";
 		let morenews = "";
-		uriBase = constants.NewsURL;
+		uriBase = this._baseurl;
 		morenews = constants.MoreNews + "?q="+val;
 		if(constants.NewsSource == "Bing"){	
-			requestHeaders.set("Ocp-Apim-Subscription-Key", constants.NewsKey);
-		    uriQuery = uriBase + "?count=4&q=" + val;
+			requestHeaders.set("Ocp-Apim-Subscription-Key", this._apikey);
+		    uriQuery = uriBase + "?count="+constants.Count+"&q=" + val;
 		}
 		else if (constants.NewsSource == "Google")
 		{
-		    uriQuery = uriBase + "?q=" + val + "&token=" + constants.NewsKey;
+		    uriQuery = uriBase + "?count="+constants.Count+"&q=" + val + "&token=" + this._apikey;
 		}
         
         return fetch(uriQuery, {
@@ -91,7 +103,7 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 				let finalhtml="";
 				if(news.getNewsCount()==0){
 					let html = [];
-					html.push("No News Data Available");
+					html.push("No news available");
 					finalhtml= finalhtml + html.join("");
 				}
 				let startDiv = "<div style='border-style: none;'>";
@@ -101,38 +113,56 @@ export class companynews implements ComponentFramework.StandardControl<IInputs, 
 					let item = news.getNewsAtIndex(index);
 					let html = [];
 					let htmlbuilder = "<br/>";
-					htmlbuilder = htmlbuilder + "<div style='padding-top:20px;border-style: none;vertical-align: bottom;'>";
+					htmlbuilder = htmlbuilder + "<div style='padding-left:-50px;padding-top:20px;border-style: none;vertical-align: bottom;'>";
 					html.push(htmlbuilder);
 					if (news.hasImage(index)) {
 						let width = 60;
 						let height = news.getImageHeight(index);
-						let imageHTML = "<div width='"+width+"'style='float:left;width:20%;border-style: none;'>";
-						imageHTML = imageHTML + "<img src='" + news.getImageUrl(index) +
+						let imageHTML = "<div width='"+width+"'style='float:left;border-style: none;'>";
+						imageHTML = imageHTML + "<img style='padding-right:10px; display:block; text-align:justify;' src='" + news.getImageUrl(index) +
 							//"&h=" + height + "&w=" + width + 
 							"' width=" + width + " height=" + height + ">";
 						imageHTML = imageHTML + "</div>"
 						html.push(imageHTML);
 					}
-					let titleHTML = "<a href='" + news.getUrl(index) + "'>" + news.getTitle(index) + "</a>";
+					let titleHTML = "<div ><a style='padding-left:10px' href='" + news.getUrl(index) + "'>" + news.getTitle(index) + "</a></div>";
 					
-					html.push(titleHTML);
-					if (news.hasCategory(index)) html.push("<div style='style='float:left;border-style: none;vertical-align: bottom;'> - " + news.getCategory(index));
+					html.push(titleHTML + "</div>");
+					if (news.hasCategory(index)) html.push("<div style='style='float:left;padding-left:50px;border-style: none;vertical-align: bottom;font-family: 'Segoe UI Regular', 'Segoe UI';'> - " + news.getCategory(index));
 					html.push(" (" + this.getHost(news.getUrl(index)) + ")");
-					let d = new Date(news.getDatePublished(index));
-					let mins =  d.getMinutes()+"";
+					let d:any = new Date(news.getDatePublished(index));
+					/*let mins =  d.getMinutes()+"";
 					if( d.getMinutes()<10){
 						mins = "0"+mins;
 					}
-					let datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + mins;
-					let dateHTML = "</div><div style='float:left;vertical-align: bottom;padding-left:10px;'>" + datestring +"</div>";
+					let datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + mins;*/
+					let today = new Date();
+					let diffTime:any = Math.abs(today.valueOf() - d.valueOf());
+					let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+					let diffHrs = Math.floor(diffTime / (1000 * 60 * 60)); 
+					let diffMins = Math.floor(diffTime / (1000 * 60)); 
+					let datestring = "";
+					if (diffDays != 0){
+						 datestring = diffDays + "d";
+					}
+					else if (diffHrs != 0){
+						datestring = diffHrs + "h";
+					}
+					else if (diffMins != 0){
+						datestring = diffMins + "m";
+					}
+					let dateHTML = " - "+ datestring +"</div>";
 					html.push(dateHTML);
 					finalhtml= finalhtml + html.join("");
 				}
 				
-				let html = [];
-				let moreNewsHTML = "<br/><div><a target='_blank' href='"+morenews+"'+val>See more on '" + constants.NewsSource + "' News</a></div>";
-				html.push(moreNewsHTML)
-				finalhtml= finalhtml + html.join("");
+				if(news.getNewsCount()!=0){
+					let html = [];
+					let moreNewsHTML = "<br/><div><a target='_blank' href='"+morenews+"'+val>See more on " + constants.NewsSource + " News</a></div>";
+					html.push(moreNewsHTML)
+					finalhtml= finalhtml + html.join("");
+				}
+				
 				
 				let endDiv = "</div>";
 				finalhtml = finalhtml + endDiv;

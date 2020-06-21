@@ -29,9 +29,9 @@ export class BingParser{
 	}
 	
 	public getImageHeight(index: any): any {
-		let item = this.getNewsAtIndex(index);
-		let height = Math.round(60 * item.image.thumbnail.height / item.image.thumbnail.width);
-		return height;
+		/*let item = this.getNewsAtIndex(index);
+		let height = Math.round(60 * item.image.thumbnail.height / item.image.thumbnail.width);*/
+		return 60;
 	}
 	
 	public getImageUrl(index: any): any {

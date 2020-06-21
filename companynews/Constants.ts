@@ -2,11 +2,9 @@
 // Licensed under the MIT License.
 export class Constants{
 	
-	NewsSource: any = "NewsSource"; // Bing Or Google Or Any other source if implemented
+	NewsSource: any = "Bing"; // Bing Or Google Or Any other source if implemented
 	
 	// Settings For News service Provider
-	NewsURL: any = "<<News API URL>>";
-	NewsKey: any = "<<API Key>>";
-	MoreNews: any = "<<More News Base URL>>";
-	
+	MoreNews: any = "https://www.bing.com/news/search";
+	Count: any = 4;
 }
