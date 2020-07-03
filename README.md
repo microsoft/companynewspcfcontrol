@@ -88,16 +88,27 @@ Steps mentioned above are sufficient if you want to use Bing News for fetching n
 Once you have the code locally, you can test the component, but before that, you need to update the Bing News key and base URL. You can provide it while testing the component locally from interface.
  
 Note: You can add more news services. We have an out of the box support for Bing news and Google news. In this example, we will use the Bing News API.
+
             NewsSource: any = "NewsSource"; 
+			
             MoreNews: any = "<<More News Base URL>>";
+			
 Replace NewsSource with “Bing” for Bing News (or “Google” for Google News)
+
 Provide News API URL, API Key and More News URL (https://www.bing.com/news/search)
+
 Note * For Google News, go to https://gnews.io/ and create an account to get api and token.
+
 We can see under getnews function, we make a call to the News API and render the results in HTML form. We are using a plain vanilla HTML to show the news, you can adjust the look and feel based on needs. 
+
 Finally, you need to build and start the application. Go to companynews folder in the repo and execute following commands
-Install - npm install
-Build - npm run build
-Start - npm start
+
+•	Install - npm install
+
+•	Build - npm run build
+
+•	Start - npm start
+
 Executing “npm start” will open a browser and display the component. To test the component, provide a value in the Value text, Key and Base URL  and see the news appearing.
 
 ## Creating Solution zip
