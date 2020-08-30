@@ -1,0 +1,47 @@
+.flex-container {
+  display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border: 1px black;
+}
+
+.flex-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.flex-container3 {
+    display: flex;
+    flex-direction: row;
+    opacity: .7;
+    font-size: 0.75rem;
+}
+
+.flex-item {
+  padding: 10px;
+}
+
+img {
+  border-radius: 4px;
+  padding: 5px;
+  height: 100px;
+  width: 150px;
+}
+
+.agoTime::before {
+    content:'\0000a0\002022\0000a0';
+}
+
+.category::before {
+    content:'\0000a0\002022\0000a0';
+}
+
+h4 {
+  text-align: left;
+  padding-left: 25px;
+}

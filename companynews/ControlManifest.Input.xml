@@ -3,8 +3,8 @@
   <control namespace="companynews" constructor="companynews" version="0.0.1" display-name-key="companynews" description-key="companynews description" control-type="standard">
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
     <property name="SearchString" display-name-key="SearchString" description-key="SearchString_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
-	<property name="APIKey" display-name-key="APIKey" description-key="APIKey_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
-	<property name="BaseURL" display-name-key="BaseURL" description-key="BaseURL_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="APIKey" display-name-key="APIKey" description-key="APIKey_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="BaseURL" display-name-key="BaseURL" description-key="BaseURL_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
     <!-- 
       Property node's of-type attribute can be of-type-group attribute. 
       Example:
@@ -22,6 +22,7 @@
       <css path="css/companynews.css" order="1" />
       <resx path="strings/companynews.1033.resx" version="1.0.0" />
       -->
+      <css path="NewsItemComponent.css" order="1" />
     </resources>
     <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
     <feature-usage>

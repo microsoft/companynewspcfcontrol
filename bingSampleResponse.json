@@ -1,0 +1,120 @@
+{
+    "_type": "News",
+    "readLink": "https:\/\/centralindia.api.cognitive.microsoft.com\/api\/v7\/news\/search?q=Microsoft",
+    "queryContext": {
+        "originalQuery": "Microsoft",
+        "adultIntent": false
+    },
+    "totalEstimatedMatches": 65,
+    "sort": [
+        {
+            "name": "Best match",
+            "id": "relevance",
+            "isSelected": true,
+            "url": "https:\/\/centralindia.api.cognitive.microsoft.com\/api\/v7\/news\/search?q=Microsoft"
+        },
+        {
+            "name": "Most recent",
+            "id": "date",
+            "isSelected": false,
+            "url": "https:\/\/centralindia.api.cognitive.microsoft.com\/api\/v7\/news\/search?q=Microsoft&sortby=date"
+        }
+    ],
+    "value": [
+        {
+            "name": "Microsoft Windows iconic “Start” button turned 25 this week",
+            "url": "https:\/\/www.thehindu.com\/sci-tech\/technology\/microsoft-windows-iconic-start-button-turned-25-this-week\/article32474993.ece",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https:\/\/www.bing.com\/th?id=ON.E28510D6B31AEDAD6754218FFDDF4704&pid=News",
+                    "width": 615,
+                    "height": 384
+                }
+            },
+            "description": "Click here to subscribe for free.) This week marked the silver jubilee year of Windows 95 – the OS version which introduced the iconic “Start” button. Microsoft Windows continues to be a prominent name in personal computing as the software has continuously evolved for nearly three and a half decades to become one of the most widely-used OS globally.",
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "The Hindu",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https:\/\/www.bing.com\/th?id=AR_eb38b0dde4b719aca22575dd70e68061&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2020-08-30T00:01:00.0000000Z",
+            "category": "ScienceAndTechnology"
+        },
+        {
+            "name": "Microsoft rebranding Bing search engine for better visibility",
+            "url": "https:\/\/www.dailypioneer.com\/2020\/technology\/microsoft-rebranding-bing-search-engine-for-better-visibility.html",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https:\/\/www.bing.com\/th?id=ON.6E052AF9E9975ED781963F7A5388315A&pid=News",
+                    "width": 700,
+                    "height": 560
+                }
+            },
+            "description": "Microsoft is working to rebrand its search engine Bing and the developer community has witnessed visible changes to the service in the recent past. There's no official announcement to date but Microso",
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "The Pioneer",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https:\/\/www.bing.com\/th?id=AR_db85e34b3de3b305924e09e49ebc4740&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2020-08-30T07:21:00.0000000Z",
+            "category": "ScienceAndTechnology"
+        },
+        {
+            "name": "After Microsoft, Centricus and Triller eye TikTok in India, other countries; submit bid to ByteDance",
+            "url": "https:\/\/www.financialexpress.com\/industry\/after-microsoft-centricus-and-triller-eye-tiktok-in-india-other-countries-submit-bid-to-bytedance\/2069530\/",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https:\/\/www.bing.com\/th?id=ON.E32CD8B6039BCCA82EB46DEEF7624340&pid=News",
+                    "width": 660,
+                    "height": 440
+                }
+            },
+            "description": "The joint bid by Centricus and Triller would include $10 billion in cash upfront while another $10 billion would be in profit-sharing from the resulting venture.",
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "The Financial Express"
+                }
+            ],
+            "datePublished": "2020-08-30T05:59:00.0000000Z",
+            "category": "ScienceAndTechnology"
+        },
+        {
+            "name": "In bid for TikTok, Microsoft flexes its power in Washington",
+            "url": "https:\/\/economictimes.indiatimes.com\/news\/international\/business\/in-bid-for-tiktok-microsoft-flexes-its-power-in-washington\/articleshow\/77825135.cms",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https:\/\/www.bing.com\/th?id=ON.9D4404C836E9C6EE4E3DC95C8D6A0C52&pid=News",
+                    "width": 700,
+                    "height": 379
+                }
+            },
+            "description": "The software giant was once a cautionary tale of an arrogant tech company caught off guard by government scrutiny. But under the leadership of Nadella and Smith, it has built one of the most potent forces in the nations capital.",
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "India Times",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https:\/\/www.bing.com\/th?id=AR_3d546a2c2256f160e693bb1084e0f54b&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2020-08-30T03:51:00.0000000Z",
+            "category": "ScienceAndTechnology"
+        }
+    ]
+}
