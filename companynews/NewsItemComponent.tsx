@@ -4,6 +4,7 @@ import * as React from "react";
 
 export class NewsItemProps {
   imageUrl: string;
+  imageName: string;
   title: string;
   newsContent: string;
   url: string;
@@ -23,7 +24,7 @@ export class NewsItemComponent extends React.Component<NewsItemProps> {
     return (
       <div className="flex-container">
         <div>
-          <img src={this.props.imageUrl} />
+          <img src={this.props.imageUrl} alt={this.props.imageName} title={this.props.newsContent}/>
         </div>
         <div>
           <div className="flex-container2">

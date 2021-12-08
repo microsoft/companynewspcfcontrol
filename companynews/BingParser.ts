@@ -26,10 +26,15 @@ export class BingParser {
     for (var i = 0; i < this._newsJson.value.length; i++) {
       // todo: limit count
       var newsItem = {} as NewsItemProps;
-      newsItem.imageUrl =
-        this._newsJson.value[i].image == null
-          ? ""
-          : this._newsJson.value[i].image.thumbnail.contentUrl;
+      if (this._newsJson.value[i].image == null) {
+        newsItem.imageUrl = "";
+        newsItem.imageName = "";
+      }
+      else {
+        newsItem.imageUrl = this._newsJson.value[i].image.thumbnail.contentUrl;
+        newsItem.imageName = this._newsJson.value[i].image.name;
+      }
+      newsItem.imageName = this._newsJson.value[i].name == null ? "" :
       newsItem.title = this._newsJson.value[i].name;
       newsItem.newsContent = this._newsJson.value[i].description;
       newsItem.url = this._newsJson.value[i].url;

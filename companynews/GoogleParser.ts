@@ -27,6 +27,7 @@ export class GoogleParser {
       // todo: limit count
       var newsItem = {} as NewsItemProps;
       newsItem.imageUrl = this._newsJson.articles[i].urlToImage;
+      newsItem.imageName = "No image description";
       newsItem.title = this._newsJson.articles[i].title;
       newsItem.newsContent = this._newsJson.articles[i].description;
       newsItem.url = this._newsJson.articles[i].url;
