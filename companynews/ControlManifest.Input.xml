@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="companynews" constructor="companynews" version="0.0.1" display-name-key="companynews" description-key="companynews description" control-type="standard">
+  <control namespace="companynews" constructor="companynews" version="0.0.2" display-name-key="companynews" description-key="companynews description" control-type="standard">
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
     <property name="SearchString" display-name-key="SearchString" description-key="SearchString_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="APIKey" display-name-key="APIKey" description-key="APIKey_Desc" of-type="SingleLine.Text" usage="bound" required="true" />
